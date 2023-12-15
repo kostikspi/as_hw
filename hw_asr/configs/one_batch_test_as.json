@@ -1,0 +1,122 @@
+{
+  "name": "one_batch_test_as",
+  "n_gpu": 1,
+  "preprocessing": {
+    "sr": 16000,
+    "spectrogram": {
+      "type": "MelSpectrogram",
+      "args": {
+      }
+    },
+    "log_spec": true
+  },
+  "augmentations": {
+    "wave": [],
+    "spectrogram": []
+  },
+  "arch": {
+    "type": "RawNet",
+    "args": {
+    }
+  },
+  "data": {
+    "train": {
+      "batch_size": 3,
+      "num_workers": 0,
+      "datasets": [
+        {
+          "type": "ASVDataset",
+          "args": {
+            "part": "train",
+            "max_audio_length": 20.0,
+            "max_text_length": 200,
+            "data_dir": "/Users/kostiks/study/cs/dla/as/LA",
+            "index_dir": "/Users/kostiks/study/cs/dla/as/index",
+            "limit": 3
+          }
+        }
+      ]
+    },
+    "val": {
+      "batch_size": 3,
+      "num_workers": 0,
+      "datasets": [
+        {
+          "type": "ASVDataset",
+          "args": {
+            "part": "dev",
+            "data_dir": "/Users/kostiks/study/cs/dla/as/LA",
+            "index_dir": "/Users/kostiks/study/cs/dla/as/index",
+            "max_audio_length": 20.0,
+            "max_text_length": 200,
+            "limit": 200
+          }
+        },
+        {
+          "type": "ASVDataset",
+          "args": {
+            "part": "eval",
+            "data_dir": "/Users/kostiks/study/cs/dla/as/LA",
+            "index_dir": "/Users/kostiks/study/cs/dla/as/index",
+            "max_audio_length": 20.0,
+            "max_text_length": 200,
+            "limit": 200
+          }
+        }
+      ]
+    },
+    "test": {
+      "batch_size": 3,
+      "num_workers": 0,
+      "datasets": [
+        {
+          "type": "ASVDataset",
+          "args": {
+            "part": "eval",
+            "data_dir": "/Users/kostiks/study/cs/dla/as/LA",
+            "index_dir": "/Users/kostiks/study/cs/dla/as/index",
+            "max_audio_length": 20.0,
+            "max_text_length": 300,
+            "limit": 200
+          }
+        }
+      ]
+    }
+  },
+  "optimizer": {
+    "type": "SGD",
+    "args": {
+      "lr": 1e-2
+    }
+  },
+  "loss": {
+    "type": "CrossEntropyLoss",
+    "args": {
+      "weights": [1, 9]
+    }
+  },
+  "metrics": [
+  ],
+  "lr_scheduler": {
+    "type": "OneCycleLR",
+    "args": {
+      "steps_per_epoch": 3,
+      "epochs": 300,
+      "anneal_strategy": "cos",
+      "max_lr": 1e-2,
+      "pct_start": 0.2
+    }
+  },
+  "trainer": {
+    "epochs": 300,
+    "save_dir": "saved/",
+    "save_period": 5,
+    "verbosity": 2,
+    "monitor": "min test_eer",
+    "early_stop": 100,
+    "visualize": "wandb",
+    "wandb_project": "as_project",
+    "len_epoch": 100,
+    "grad_norm_clip": 10
+  }
+}
