@@ -166,7 +166,7 @@ class Trainer(BaseTrainer):
                 self.lr_scheduler.step()
 
         metrics.update("loss", batch["loss"].item())
-        self.whole_preds.append(batch["probs"][:, 1].detach().numpy())
+        self.whole_preds.append(batch["probs"][:, 1].detach().cpu().numpy())
         self.whole_target.append(batch["true_label"])
         for met in self.metrics:
             metrics.update(met.name, met(**batch))
