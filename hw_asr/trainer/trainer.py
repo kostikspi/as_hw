@@ -69,7 +69,7 @@ class Trainer(BaseTrainer):
         """
         Move all necessary tensors to the HPU
         """
-        for tensor_for_gpu in ["wave"]:
+        for tensor_for_gpu in ["wave", "label"]:
             batch[tensor_for_gpu] = batch[tensor_for_gpu].to(device)
         return batch
 
