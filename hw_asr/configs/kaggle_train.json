@@ -79,6 +79,13 @@
   },
   "metrics": [
   ],
+  "lr_scheduler": {
+    "type": "ConstantLR",
+    "args": {
+      "factor": 1,
+      "total_iters": 5
+    }
+  },
   "trainer": {
     "epochs": 300,
     "save_dir": "saved/",

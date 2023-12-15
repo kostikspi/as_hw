@@ -98,13 +98,10 @@
   "metrics": [
   ],
   "lr_scheduler": {
-    "type": "OneCycleLR",
+    "type": "ConstantLR",
     "args": {
-      "steps_per_epoch": 3,
-      "epochs": 300,
-      "anneal_strategy": "cos",
-      "max_lr": 1e-2,
-      "pct_start": 0.2
+      "factor": 1,
+      "total_iters": 5
     }
   },
   "trainer": {
