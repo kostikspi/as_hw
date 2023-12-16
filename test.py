@@ -6,11 +6,11 @@ from pathlib import Path
 import torch
 from tqdm import tqdm
 
-import hw_asr.model as module_model
-from hw_asr.trainer import Trainer
-from hw_asr.utils import ROOT_PATH
-from hw_asr.utils.object_loading import get_dataloaders
-from hw_asr.utils.parse_config import ConfigParser
+import hw_antispoof.model as module_model
+from hw_antispoof.trainer import Trainer
+from hw_antispoof.utils import ROOT_PATH
+from hw_antispoof.utils.object_loading import get_dataloaders
+from hw_antispoof.utils.parse_config import ConfigParser
 
 DEFAULT_CHECKPOINT_PATH = ROOT_PATH / "default_test_model" / "checkpoint.pth"
 
@@ -25,10 +25,10 @@ def main(config, out_file):
     text_encoder = config.get_text_encoder()
 
     # setup data_loader instances
-    dataloaders = get_dataloaders(config, text_encoder)
+    dataloaders = get_dataloaders(config)
 
     # build model architecture
-    model = config.init_obj(config["arch"], module_model, n_class=len(text_encoder))
+    model = config.init_obj(config["arch"], module_model)
     logger.info(model)
 
     logger.info("Loading checkpoint: {} ...".format(config.resume))
@@ -52,22 +52,23 @@ def main(config, out_file):
                 batch.update(output)
             else:
                 batch["logits"] = output
-            batch["log_probs"] = torch.log_softmax(batch["logits"], dim=-1)
-            batch["log_probs_length"] = model.transform_input_lengths(
-                batch["spectrogram_length"]
-            )
-            batch["probs"] = batch["log_probs"].exp().cpu()
-            batch["argmax"] = batch["probs"].argmax(-1)
-            for i in range(len(batch["text"])):
-                argmax = batch["argmax"][i]
-                argmax = argmax[: int(batch["log_probs_length"][i])]
+            # batch["log_probs"] = torch.log_softmax(batch["logits"], dim=-1)
+            # batch["log_probs_length"] = model.transform_input_lengths(
+            #     batch["spectrogram_length"]
+            # )
+            batch["probs"] = torch.softmax(batch["logits"], dim=-1)
+            # batch["probs"] = batch["log_probs"].exp().cpu()
+            batch["pred"] = batch["probs"].argmax(-1)
+            # batch["pred_label"] = "bonafide" if batch["pred"] == 1 else "spoof"
+            for i in range(len(batch["audio_path"])):
+                pred = batch["pred"][i]
                 results.append(
                     {
-                        "ground_trurh": batch["text"][i],
-                        "pred_text_argmax": text_encoder.ctc_decode(argmax.cpu().numpy()),
-                        "pred_text_beam_search": text_encoder.ctc_beam_search(
-                            batch["probs"][i], batch["log_probs_length"][i], beam_size=100
-                        )[:10],
+                        "audio_path": batch["audio_path"][i],
+                        "true_label": batch["true_label"][i],
+                        "probs": batch["probs"][i].cpu().numpy().tolist(),
+                        "pred": pred.item(),
+                        "pred_label": "bonafide" if pred == 1 else "spoof"
                     }
                 )
     with Path(out_file).open("w") as f:
@@ -114,7 +115,7 @@ if __name__ == "__main__":
     args.add_argument(
         "-b",
         "--batch-size",
-        default=20,
+        default=1,
         type=int,
         help="Test dataset batch size",
     )
@@ -143,7 +144,7 @@ if __name__ == "__main__":
         with Path(args.config).open() as f:
             config.config.update(json.load(f))
 
-    # if `--test-data-folder` was provided, set it hw_asr a default test set
+    # if `--test-data-folder` was provided, set it hw_antispoof a default test set
     if args.test_data_folder is not None:
         test_data_folder = Path(args.test_data_folder).absolute().resolve()
         assert test_data_folder.exists()

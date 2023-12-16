@@ -1,0 +1,92 @@
+[
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_2_nv_true.wav",
+    "true_label": "test_data",
+    "probs": [
+      0.9999990463256836,
+      9.297159522247966e-07
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  },
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_2_nv.wav",
+    "true_label": "test_data",
+    "probs": [
+      0.999685525894165,
+      0.00031447934452444315
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  },
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_1.flac",
+    "true_label": "test_data",
+    "probs": [
+      1.0,
+      1.7384216895871552e-13
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  },
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_2.flac",
+    "true_label": "test_data",
+    "probs": [
+      1.0,
+      4.539221887256417e-09
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  },
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_3.flac",
+    "true_label": "test_data",
+    "probs": [
+      0.9385665059089661,
+      0.06143353879451752
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  },
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_3_nv.wav",
+    "true_label": "test_data",
+    "probs": [
+      0.9997871518135071,
+      0.00021291618759278208
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  },
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_1_nv_true.wav",
+    "true_label": "test_data",
+    "probs": [
+      1.0,
+      5.316367901464503e-10
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  },
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_1_nv.wav",
+    "true_label": "test_data",
+    "probs": [
+      0.999998927116394,
+      1.1176589396200143e-06
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  },
+  {
+    "audio_path": "/Users/kostiks/study/cs/dla/as_hw_dla/test_data/audio/audio_3_nv_true.wav",
+    "true_label": "test_data",
+    "probs": [
+      1.0,
+      5.4379857061803705e-08
+    ],
+    "pred": 0,
+    "pred_label": "spoof"
+  }
+]

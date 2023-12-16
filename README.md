@@ -32,7 +32,7 @@ the workflow.
 1) Search project for `# TODO: your code here` and implement missing functionality
 2) Make sure all tests work without errors
    ```shell
-   python -m unittest discover hw_asr/tests
+   python -m unittest discover hw_antispoof/tests
    ```
 3) Make sure `test.py` works fine and works as expected. You should create files `default_test_config.json` and your
    installation guide should download your model checpoint and configs in `default_test_model/checkpoint.pth`
