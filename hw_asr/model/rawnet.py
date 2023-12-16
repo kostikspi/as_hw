@@ -11,8 +11,9 @@ from hw_asr.model.ResBlock import ResBlock
 
 
 class RawNet(BaseModel):
-    def __init__(self):
+    def __init__(self, do_abs):
         super().__init__()
+        self.do_abs = do_abs
         # HINT #5
         self.sinc_filter = SincConv_fast(kernel_size=129, out_channels=20, min_low_hz=0, min_band_hz=0)
         self.res_blocks1 = nn.Sequential(*[ResBlock(20, 20, sample=True),
@@ -32,7 +33,8 @@ class RawNet(BaseModel):
         x = self.sinc_filter(wave)
 
         # HINT #1
-        x = torch.abs(x)  # 3, 128, 63872
+        if self.do_abs:
+            x = torch.abs(x)  # 3, 128, 63872
 
         x = self.maxpool(x)
 

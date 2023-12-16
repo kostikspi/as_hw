@@ -17,7 +17,7 @@
   "arch": {
     "type": "RawNet",
     "args": {
-      "do_abs": true
+      "do_abs": false
     }
   },
   "data": {
