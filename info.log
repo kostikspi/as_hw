@@ -1,0 +1,198 @@
+2023-12-16 13:22:45,168 - train - INFO - RawNet(
+  (sinc_filter): SincConv_fast()
+  (res_blocks1): Sequential(
+    (0): ResBlock(
+      (bn1): BatchNorm1d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (l_relu): LeakyReLU(negative_slope=0.01)
+      (conv1): Conv1d(20, 20, kernel_size=(3,), stride=(1,), padding=(1,))
+      (bn2): BatchNorm1d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv1d(20, 20, kernel_size=(3,), stride=(1,), padding=(1,))
+      (sample_conv): Conv1d(20, 20, kernel_size=(1,), stride=(1,))
+      (max_pool): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+      (FMS): FMS(
+        (avgpool): AdaptiveAvgPool1d(output_size=1)
+        (fc): Linear(in_features=20, out_features=20, bias=True)
+      )
+    )
+    (1): ResBlock(
+      (bn1): BatchNorm1d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (l_relu): LeakyReLU(negative_slope=0.01)
+      (conv1): Conv1d(20, 20, kernel_size=(3,), stride=(1,), padding=(1,))
+      (bn2): BatchNorm1d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv1d(20, 20, kernel_size=(3,), stride=(1,), padding=(1,))
+      (max_pool): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+      (FMS): FMS(
+        (avgpool): AdaptiveAvgPool1d(output_size=1)
+        (fc): Linear(in_features=20, out_features=20, bias=True)
+      )
+    )
+  )
+  (res_blocks2): Sequential(
+    (0): ResBlock(
+      (bn1): BatchNorm1d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (l_relu): LeakyReLU(negative_slope=0.01)
+      (conv1): Conv1d(20, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (sample_conv): Conv1d(20, 128, kernel_size=(1,), stride=(1,))
+      (max_pool): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+      (FMS): FMS(
+        (avgpool): AdaptiveAvgPool1d(output_size=1)
+        (fc): Linear(in_features=128, out_features=128, bias=True)
+      )
+    )
+    (1): ResBlock(
+      (bn1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (l_relu): LeakyReLU(negative_slope=0.01)
+      (conv1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (max_pool): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+      (FMS): FMS(
+        (avgpool): AdaptiveAvgPool1d(output_size=1)
+        (fc): Linear(in_features=128, out_features=128, bias=True)
+      )
+    )
+    (2): ResBlock(
+      (bn1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (l_relu): LeakyReLU(negative_slope=0.01)
+      (conv1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (max_pool): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+      (FMS): FMS(
+        (avgpool): AdaptiveAvgPool1d(output_size=1)
+        (fc): Linear(in_features=128, out_features=128, bias=True)
+      )
+    )
+    (3): ResBlock(
+      (bn1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (l_relu): LeakyReLU(negative_slope=0.01)
+      (conv1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+      (max_pool): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+      (FMS): FMS(
+        (avgpool): AdaptiveAvgPool1d(output_size=1)
+        (fc): Linear(in_features=128, out_features=128, bias=True)
+      )
+    )
+  )
+  (gru): GRU(128, 1024, num_layers=3)
+  (fc1): Linear(in_features=1024, out_features=1024, bias=True)
+  (fc2): Linear(in_features=1024, out_features=2, bias=True)
+  (bn1): BatchNorm1d(20, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (maxpool): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+)
+Trainable parameters: 17621870
+2023-12-16 13:43:38,182 - trainer - INFO -     epoch          : 1
+2023-12-16 13:43:38,182 - trainer - INFO -     loss           : 0.3236745341867209
+2023-12-16 13:43:38,183 - trainer - INFO -     eer            : 0.2537837456368266
+2023-12-16 13:43:38,183 - trainer - INFO -     grad norm      : 5.94690972328186
+2023-12-16 13:43:38,183 - trainer - INFO -     val_loss       : 0.2944318768658233
+2023-12-16 13:43:38,184 - trainer - INFO -     val_eer        : 0.09803547982080968
+2023-12-16 13:43:38,184 - trainer - INFO -     test_loss      : 0.31420630450035536
+2023-12-16 13:43:38,185 - trainer - INFO -     test_eer       : 0.0989641730032882
+2023-12-16 13:43:38,607 - trainer - INFO - Saving current best: model_best.pth ...
+2023-12-16 13:52:43,420 - trainer - INFO -     epoch          : 2
+2023-12-16 13:52:43,421 - trainer - INFO -     loss           : 0.16729855528101326
+2023-12-16 13:52:43,421 - trainer - INFO -     eer            : 0.0531768106001516
+2023-12-16 13:52:43,421 - trainer - INFO -     grad norm      : 4.674267959594727
+2023-12-16 13:52:43,421 - trainer - INFO -     val_loss       : 0.18889433425099636
+2023-12-16 13:52:43,422 - trainer - INFO -     val_eer        : 0.05604830737461831
+2023-12-16 13:52:43,422 - trainer - INFO -     test_loss      : 0.21525940081065117
+2023-12-16 13:52:43,422 - trainer - INFO -     test_eer       : 0.05765051581869027
+2023-12-16 13:52:43,999 - trainer - INFO - Saving current best: model_best.pth ...
+2023-12-16 14:01:52,563 - trainer - INFO -     epoch          : 3
+2023-12-16 14:01:52,563 - trainer - INFO -     loss           : 0.11438214305788279
+2023-12-16 14:01:52,564 - trainer - INFO -     eer            : 0.029996041366387734
+2023-12-16 14:01:52,564 - trainer - INFO -     grad norm      : 3.5271326422691347
+2023-12-16 14:01:52,564 - trainer - INFO -     val_loss       : 0.14017430387774155
+2023-12-16 14:01:52,565 - trainer - INFO -     val_eer        : 0.04041734893841614
+2023-12-16 14:01:52,565 - trainer - INFO -     test_loss      : 0.2751543779460066
+2023-12-16 14:01:52,565 - trainer - INFO -     test_eer       : 0.06471547185347322
+2023-12-16 14:11:01,129 - trainer - INFO -     epoch          : 4
+2023-12-16 14:11:01,130 - trainer - INFO -     loss           : 0.07317288468591869
+2023-12-16 14:11:01,130 - trainer - INFO -     eer            : 0.02332816039941934
+2023-12-16 14:11:01,130 - trainer - INFO -     grad norm      : 3.2697066636383534
+2023-12-16 14:11:01,131 - trainer - INFO -     val_loss       : 0.12876238381104158
+2023-12-16 14:11:01,131 - trainer - INFO -     val_eer        : 0.028234397592770653
+2023-12-16 14:11:01,131 - trainer - INFO -     test_loss      : 0.3217176858401181
+2023-12-16 14:11:01,131 - trainer - INFO -     test_eer       : 0.05954930797267251
+2023-12-16 14:20:22,226 - trainer - INFO -     epoch          : 5
+2023-12-16 14:20:22,226 - trainer - INFO -     loss           : 0.0653647460101638
+2023-12-16 14:20:22,227 - trainer - INFO -     eer            : 0.015519006298663707
+2023-12-16 14:20:22,227 - trainer - INFO -     grad norm      : 3.1229952075332403
+2023-12-16 14:20:22,227 - trainer - INFO -     val_loss       : 0.16961561384882354
+2023-12-16 14:20:22,227 - trainer - INFO -     val_eer        : 0.030179857817102168
+2023-12-16 14:20:22,228 - trainer - INFO -     test_loss      : 0.23986710259680896
+2023-12-16 14:20:22,228 - trainer - INFO -     test_eer       : 0.052053428045688674
+2023-12-16 14:20:22,997 - trainer - INFO - Saving current best: model_best.pth ...
+2023-12-16 14:29:40,077 - trainer - INFO -     epoch          : 6
+2023-12-16 14:29:40,077 - trainer - INFO -     loss           : 0.045007334234105655
+2023-12-16 14:29:40,078 - trainer - INFO -     eer            : 0.011159870990470059
+2023-12-16 14:29:40,078 - trainer - INFO -     grad norm      : 2.5002867221436462
+2023-12-16 14:29:40,078 - trainer - INFO -     val_loss       : 0.09961110953899757
+2023-12-16 14:29:40,079 - trainer - INFO -     val_eer        : 0.02157946684511347
+2023-12-16 14:29:40,079 - trainer - INFO -     test_loss      : 0.24087471476568934
+2023-12-16 14:29:40,079 - trainer - INFO -     test_eer       : 0.04026105895320976
+2023-12-16 14:29:40,647 - trainer - INFO - Saving current best: model_best.pth ...
+2023-12-16 14:38:55,294 - trainer - INFO -     epoch          : 7
+2023-12-16 14:38:55,295 - trainer - INFO -     loss           : 0.05310914541129023
+2023-12-16 14:38:55,295 - trainer - INFO -     eer            : 0.009825471038228846
+2023-12-16 14:38:55,295 - trainer - INFO -     grad norm      : 2.317336381748319
+2023-12-16 14:38:55,296 - trainer - INFO -     val_loss       : 0.10647957165659568
+2023-12-16 14:38:55,296 - trainer - INFO -     val_eer        : 0.022375591372592755
+2023-12-16 14:38:55,296 - trainer - INFO -     test_loss      : 0.2695024819011869
+2023-12-16 14:38:55,296 - trainer - INFO -     test_eer       : 0.04937888434724705
+2023-12-16 14:48:18,611 - trainer - INFO -     epoch          : 8
+2023-12-16 14:48:18,611 - trainer - INFO -     loss           : 0.04107704242414911
+2023-12-16 14:48:18,612 - trainer - INFO -     eer            : 0.01022944295002386
+2023-12-16 14:48:18,612 - trainer - INFO -     grad norm      : 2.4595503664202987
+2023-12-16 14:48:18,612 - trainer - INFO -     val_loss       : 0.4767612705503536
+2023-12-16 14:48:18,613 - trainer - INFO -     val_eer        : 0.05014465006007371
+2023-12-16 14:48:18,613 - trainer - INFO -     test_loss      : 0.3507270428912636
+2023-12-16 14:48:18,613 - trainer - INFO -     test_eer       : 0.05547487697777924
+2023-12-16 14:57:37,935 - trainer - INFO -     epoch          : 9
+2023-12-16 14:57:37,935 - trainer - INFO -     loss           : 0.013288673729111905
+2023-12-16 14:57:37,936 - trainer - INFO -     eer            : 0.0064969796740429854
+2023-12-16 14:57:37,936 - trainer - INFO -     grad norm      : 1.6255203253403305
+2023-12-16 14:57:37,936 - trainer - INFO -     val_loss       : 0.3120016316147338
+2023-12-16 14:57:37,936 - trainer - INFO -     val_eer        : 0.03610594067883011
+2023-12-16 14:57:37,936 - trainer - INFO -     test_loss      : 0.33520047393254765
+2023-12-16 14:57:37,936 - trainer - INFO -     test_eer       : 0.05435966329916024
+2023-12-16 15:06:50,440 - trainer - INFO -     epoch          : 10
+2023-12-16 15:06:50,440 - trainer - INFO -     loss           : 0.009098452944508608
+2023-12-16 15:06:50,441 - trainer - INFO -     eer            : 0.005317318475903011
+2023-12-16 15:06:50,441 - trainer - INFO -     grad norm      : 0.7069815987045877
+2023-12-16 15:06:50,441 - trainer - INFO -     val_loss       : 0.130709142048808
+2023-12-16 15:06:50,441 - trainer - INFO -     val_eer        : 0.021534615750746767
+2023-12-16 15:06:50,442 - trainer - INFO -     test_loss      : 0.33473476986349
+2023-12-16 15:06:50,442 - trainer - INFO -     test_eer       : 0.04637270544554967
+2023-12-16 15:06:50,876 - trainer - INFO - Saving checkpoint: saved/models/one_batch_test_as/1216_132244/checkpoint-epoch10.pth ...
+2023-12-16 15:15:59,970 - trainer - INFO -     epoch          : 11
+2023-12-16 15:15:59,971 - trainer - INFO -     loss           : 0.029935030983178876
+2023-12-16 15:15:59,971 - trainer - INFO -     eer            : 0.005685644655687825
+2023-12-16 15:15:59,972 - trainer - INFO -     grad norm      : 1.8737794864363968
+2023-12-16 15:15:59,972 - trainer - INFO -     val_loss       : 0.16368158570090727
+2023-12-16 15:15:59,972 - trainer - INFO -     val_eer        : 0.024035117069101386
+2023-12-16 15:15:59,973 - trainer - INFO -     test_loss      : 0.234662476445165
+2023-12-16 15:15:59,973 - trainer - INFO -     test_eer       : 0.04201360083282376
+2023-12-16 15:25:15,309 - trainer - INFO -     epoch          : 12
+2023-12-16 15:25:15,309 - trainer - INFO -     loss           : 0.0028223860311845784
+2023-12-16 15:25:15,310 - trainer - INFO -     eer            : 0.004113111927617806
+2023-12-16 15:25:15,310 - trainer - INFO -     grad norm      : 0.6882893580477685
+2023-12-16 15:25:15,310 - trainer - INFO -     val_loss       : 0.314622985027567
+2023-12-16 15:25:15,311 - trainer - INFO -     val_eer        : 0.0369020652063094
+2023-12-16 15:25:15,311 - trainer - INFO -     test_loss      : 0.36063550435007913
+2023-12-16 15:25:15,311 - trainer - INFO -     test_eer       : 0.04704134137016007
+2023-12-16 15:34:33,305 - trainer - INFO -     epoch          : 13
+2023-12-16 15:34:33,306 - trainer - INFO -     loss           : 0.0049604230285331145
+2023-12-16 15:34:33,306 - trainer - INFO -     eer            : 0.006150268267596669
+2023-12-16 15:34:33,307 - trainer - INFO -     grad norm      : 1.0761556681990623
+2023-12-16 15:34:33,307 - trainer - INFO -     val_loss       : 0.08108629273761599
+2023-12-16 15:34:33,307 - trainer - INFO -     val_eer        : 0.018131459754556788
+2023-12-16 15:34:33,307 - trainer - INFO -     test_loss      : 0.30345443073206896
+2023-12-16 15:34:33,308 - trainer - INFO -     test_eer       : 0.04365902709258877
+2023-12-16 15:37:21,245 - trainer - INFO - Saving model on keyboard interrupt
