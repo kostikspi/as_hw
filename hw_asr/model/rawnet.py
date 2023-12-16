@@ -23,7 +23,7 @@ class RawNet(BaseModel):
         self.gru = nn.GRU(input_size=128, hidden_size=1024, num_layers=3)
         self.fc1 = nn.Linear(in_features=1024, out_features=1024)
         self.fc2 = nn.Linear(in_features=1024, out_features=2)
-        self.bn1 = nn.BatchNorm1d(128)
+        self.bn1 = nn.BatchNorm1d(20)
         self.bn2 = nn.BatchNorm1d(128)
         self.maxpool = nn.MaxPool1d(3)
 
