@@ -195,13 +195,14 @@ class Trainer(BaseTrainer):
                     metrics=self.evaluation_metrics,
                 )
             self.writer.set_step(epoch * self.len_epoch, part)
-            self._log_scalars(self.evaluation_metrics)
             self._log_predictions(**batch)
             bonafide_inds = np.concatenate(self.whole_target) == 'bonafide'
             spoof_inds = np.concatenate(self.whole_target) != 'bonafide'
             bonafide_scores = np.concatenate(self.whole_preds)[bonafide_inds]
             other_scores = np.concatenate(self.whole_preds)[spoof_inds]
-            self.evaluation_metrics.update("eer", self.eer(bonafide_scores, other_scores))
+            eer = self.eer(bonafide_scores, other_scores)
+            self.evaluation_metrics.update("eer", eer)
+            self._log_scalars(self.evaluation_metrics)
 
         # add histogram of model parameters to the tensorboard
         for name, p in self.model.named_parameters():
