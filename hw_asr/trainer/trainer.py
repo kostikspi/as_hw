@@ -122,6 +122,12 @@ class Trainer(BaseTrainer):
                 self.writer.add_scalar(
                     "learning rate", self.lr_scheduler.get_last_lr()[0]
                 )
+                # if batch_idx % self.log_step * 10 == 0:
+                bonafide_inds = np.concatenate(self.whole_target) == 'bonafide'
+                spoof_inds = np.concatenate(self.whole_target) != 'bonafide'
+                bonafide_scores = np.concatenate(self.whole_preds)[bonafide_inds]
+                other_scores = np.concatenate(self.whole_preds)[spoof_inds]
+                self.train_metrics.update("eer", self.eer(bonafide_scores, other_scores))
                 self._log_predictions(**batch)
                 self._log_scalars(self.train_metrics)
                 # we don't want to reset train metrics at the start of every epoch
@@ -131,17 +137,12 @@ class Trainer(BaseTrainer):
             if batch_idx >= self.len_epoch:
                 break
         log = last_train_metrics
-        bonafide_inds = np.concatenate(self.whole_target) == 'bonafide'
-        spoof_inds = np.concatenate(self.whole_target) != 'bonafide'
-        bonafide_scores = np.concatenate(self.whole_preds)[bonafide_inds]
-        other_scores = np.concatenate(self.whole_preds)[spoof_inds]
-        self.train_metrics.update("eer", self.eer(bonafide_scores, other_scores))
-
-        for part, dataloader in self.evaluation_dataloaders.items():
-            self.whole_target = []
-            self.whole_preds = []
-            val_log = self._evaluation_epoch(epoch, part, dataloader)
-            log.update(**{f"{part}_{name}": value for name, value in val_log.items()})
+        if epoch % 4 == 0:
+            for part, dataloader in self.evaluation_dataloaders.items():
+                self.whole_target = []
+                self.whole_preds = []
+                val_log = self._evaluation_epoch(epoch, part, dataloader)
+                log.update(**{f"{part}_{name}": value for name, value in val_log.items()})
 
         return log
 

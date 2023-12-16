@@ -14,8 +14,8 @@ class RawNet(BaseModel):
     def __init__(self):
         super().__init__()
         # HINT #5
-        self.sinc_filter = SincConv_fast(kernel_size=129, out_channels=128, min_low_hz=0, min_band_hz=0)
-        self.res_blocks1 = nn.Sequential(*[ResBlock(128, 20, sample=True),
+        self.sinc_filter = SincConv_fast(kernel_size=129, out_channels=20, min_low_hz=0, min_band_hz=0)
+        self.res_blocks1 = nn.Sequential(*[ResBlock(20, 20, sample=True),
                                            ResBlock(20, 20)])
         self.res_blocks2 = nn.Sequential(*[ResBlock(20, 128, sample=True) if i == 0
                                            else ResBlock(128, 128)
@@ -28,13 +28,19 @@ class RawNet(BaseModel):
         self.maxpool = nn.MaxPool1d(3)
 
     def forward(self, wave, **batch) -> Union[Tensor, dict]:
+
         x = self.sinc_filter(wave)
+
+        # HINT #1
+        x = torch.abs(x)  # 3, 128, 63872
+
         x = self.maxpool(x)
+
+
         x = self.bn1(x)
         x = F.relu(x)
 
-        # HINT #1
-        x = torch.abs(x) # 3, 128, 63872
+
 
         x = self.res_blocks1(x)
         x = self.res_blocks2(x)

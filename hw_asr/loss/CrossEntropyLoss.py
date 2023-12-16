@@ -7,7 +7,7 @@ class CrossEntropyLoss(torch.nn.Module):
     def __init__(self, weights):
         super().__init__()
         self.weights = weights
-        self.loss = nn.BCEWithLogitsLoss(weight=torch.tensor(weights))
+        self.loss = nn.BCEWithLogitsLoss(pos_weight=torch.tensor(weights))
 
     def forward(self, logits, label, **batch) -> Tensor:
         loss = self.loss(logits, label.float())
