@@ -1,0 +1,102 @@
+{
+  "name": "one_batch_test_as",
+  "n_gpu": 1,
+  "preprocessing": {
+    "sr": 16000,
+    "spectrogram": {
+      "type": "MelSpectrogram",
+      "args": {
+      }
+    },
+    "log_spec": true
+  },
+  "augmentations": {
+    "wave": [],
+    "spectrogram": []
+  },
+  "arch": {
+    "type": "RawNet",
+    "args": {
+      "do_abs": false,
+      "grad_sinc": true
+    }
+  },
+  "data": {
+    "train": {
+      "batch_size": 32,
+      "num_workers": 0,
+      "datasets": [
+        {
+          "type": "ASVDataset",
+          "args": {
+            "part": "train",
+            "data_dir": "/kaggle/input/asvpoof-2019-dataset/LA",
+            "index_dir": "/kaggle/working"
+          }
+        }
+      ]
+    },
+    "val": {
+      "batch_size": 32,
+      "num_workers": 0,
+      "datasets": [
+        {
+          "type": "ASVDataset",
+          "args": {
+            "part": "dev",
+            "data_dir": "/kaggle/input/asvpoof-2019-dataset/LA",
+            "index_dir": "/kaggle/working"
+
+          }
+        }
+      ]
+    },
+    "test": {
+      "batch_size": 32,
+      "num_workers": 0,
+      "datasets": [
+        {
+          "type": "ASVDataset",
+          "args": {
+            "part": "eval",
+            "data_dir": "/kaggle/input/asvpoof-2019-dataset/LA",
+            "index_dir": "/kaggle/working"
+          }
+        }
+      ]
+    }
+  },
+  "optimizer": {
+    "type": "Adam",
+    "args": {
+      "lr": 1e-4,
+      "weight_decay": 1e-4
+    }
+  },
+  "loss": {
+    "type": "CrossEntropyLoss",
+    "args": {
+      "weights": [1, 9]
+    }
+  },
+  "metrics": [
+  ],
+  "lr_scheduler": {
+    "type": "ConstantLR",
+    "args": {
+      "factor": 1,
+      "total_iters": 5
+    }
+  },
+  "trainer": {
+    "epochs": 300,
+    "save_dir": "saved/",
+    "save_period": 5,
+    "verbosity": 2,
+    "monitor": "min test_eer",
+    "early_stop": 100,
+    "visualize": "wandb",
+    "wandb_project": "as_project",
+    "grad_norm_clip": 10
+  }
+}
